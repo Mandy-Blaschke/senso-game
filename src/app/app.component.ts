@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadHighscore();
     this.preloadAudios();
   }
 
@@ -161,12 +162,26 @@ export class AppComponent implements OnInit {
 
   gameFinished(): void {
     this.everPlayed = true;
+    this.highscore = this.level;
+    this.saveHighscore();
     this.simonsTurns = [];
     this.playersTurns = [];
     this.activeGame = false;
     this.level = 0;
   }
 
+  saveHighscore(): void {
+    localStorage.setItem('highscore', JSON.stringify(this.highscore));
+  }
+
+  loadHighscore(): void {
+    const score = localStorage.getItem('highscore');
+
+    if (score) {
+      this.highscore = JSON.parse(score);
+      this.everPlayed = true;
+    }
+  }
 
 }
 
