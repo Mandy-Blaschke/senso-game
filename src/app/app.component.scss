@@ -1,30 +1,95 @@
-.game {
+.content {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  .field {
-    height: 150px;
-    width: 150px;
-    margin: 10px;
-    border-radius: 100%;
+  button {
+    margin: 15px;
+    padding: 5px 10px;
+    font-family: 'Goldman', cursive;
+    outline: none;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    background-color: #5a6262;
+    color: ghostwhite;
+  }
 
-    &.glowRed {
-      background-color: #fd0000 !important;
-      box-shadow: 0 0 25px #fd0000;
+  .level {
+    font-size: 2rem;
+  }
+
+  .game {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+  'field1 field2'
+  'field3 field4';
+    position: relative;
+    margin: 25px;
+
+    .title {
+      position: absolute;
+      left: 33%;
+      top: 33%;
+      height: 150px;
+      width: 150px;
+      border-radius: 100%;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
     }
 
-    &.glowGreen {
-      background-color: #69fc01 !important;
-      box-shadow: 0 0 25px #69fc01;
-    }
 
-    &.glowBlue {
-      background-color: #005dfd !important;
-      box-shadow: 0 0 25px #005dfd;
-    }
+    .field {
+      height: 200px;
+      width: 200px;
+      margin: 5px;
+      border: 6px solid #5a6262;
 
-    &.glowYellow {
-      background-color: #fcf801 !important;
-      box-shadow: 0 0 25px #fcf801;
+      &#yellow {
+        grid-area: field1;
+        border-top-left-radius: 100%;
+      }
+
+      &#blue {
+        grid-area: field2;
+        border-top-right-radius: 100%;
+      }
+
+      &#green {
+        grid-area: field3;
+        border-bottom-left-radius: 100%;
+      }
+
+      &#red {
+        grid-area: field4;
+        border-bottom-right-radius: 100%;
+      }
+
+      &.glowRed {
+        background-color: #fd0000 !important;
+        box-shadow: 0 0 25px #fd0000;
+      }
+
+      &.glowGreen {
+        background-color: #69fc01 !important;
+        box-shadow: 0 0 25px #69fc01;
+      }
+
+      &.glowBlue {
+        background-color: #005dfd !important;
+        box-shadow: 0 0 25px #005dfd;
+      }
+
+      &.glowYellow {
+        background-color: #fcf801 !important;
+        box-shadow: 0 0 25px #fcf801;
+      }
     }
   }
 }

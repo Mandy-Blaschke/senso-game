@@ -21,7 +21,9 @@ export class AppComponent implements OnInit {
 
   activeGame = false;
 
-  score = 0;
+  level = 0;
+
+  timer = 1000;
 
   ngOnInit(): void {
     this.preloadAudios();
@@ -95,26 +97,37 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       field.active = false;
-    }, 800);
+    }, 400);
   }
 
-  repeatSimonsMoves(): void {
-    let offset = 0;
-    this.simonsTurns.forEach((field) => {
-      offset += 1000;
+  repeatSimonsMoves(): Promise<void> {
+    return new Promise((resolve) => {
+      let offset = 0;
+
+      this.simonsTurns.forEach((field) => {
+        setTimeout(() => {
+          this.playSound(field);
+        }, offset += this.timer);
+      });
+
       setTimeout(() => {
-        this.playSound(field);
-      }, offset);
+        resolve();
+      }, offset += this.timer);
+
     });
+
   }
 
   simonsTurn(): void {
     this.playerCanClick = false;
-    this.simonsMove();
-    this.repeatSimonsMoves();
+    if (this.activeGame) {
+      this.simonsMove();
 
-    this.playerCanClick = true;
-    this.playersTurns = [];
+      this.repeatSimonsMoves().then(() => {
+        this.playerCanClick = true;
+        this.playersTurns = [];
+      });
+    }
   }
 
   simonsMove(): void {
@@ -131,27 +144,26 @@ export class AppComponent implements OnInit {
       counter++;
 
       if (this.playersTurns[counter] === this.simonsTurns[counter]) {
-        this.score++;
 
+        if (this.playersTurns.length === this.simonsTurns.length) {
+          this.level++;
+          this.playerCanClick = false;
+          setTimeout(() => {
+            this.simonsTurn();
+          }, 1200);
+        }
       } else {
         this.gameFinished();
-      }
-
-      if (this.playersTurns.length === this.simonsTurns.length) {
-        this.playerCanClick = false;
-        setTimeout(() => {
-          this.simonsTurn();
-        }, 1200);
       }
     }
   }
 
   gameFinished(): void {
-    alert('Falscher Zug - Spiel beendet');
+    console.log('Falscher Zug - Spiel beendet');
     this.simonsTurns = [];
     this.playersTurns = [];
     this.activeGame = false;
-    this.score = 0;
+    this.level = 0;
   }
 
 }

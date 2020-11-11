@@ -1,27 +1,32 @@
-<h1>SENSO - Simon Says</h1>
+<div class="content">
 
-<button (click)="startGame()">
-  Start
-</button>
-
-<h2>
-  Punkte: {{score}}
-</h2>
+  <h2 class="level">
+    Level: {{level}}
+  </h2>
 
 
-<div class="game">
+  <div class="game">
 
-  <div class="fields" *ngFor="let field of fields">
+    <div class="title">SENSO</div>
 
-    <div class="field"
-         (click)="playersMove(field)"
-         [class.glowGreen]="field.active && field.name === 'green'"
-         [class.glowRed]="field.active && field.name === 'red'"
-         [class.glowYellow]="field.active && field.name === 'yellow'"
-         [class.glowBlue]="field.active && field.name === 'blue'"
-         [ngStyle]="{backgroundColor: field.color}">
+    <div class="fields" *ngFor="let field of fields">
+
+      <div class="field" id="{{field.name}}"
+           (click)="playersMove(field)"
+           [class.glowGreen]="field.active && field.name === 'green'"
+           [class.glowRed]="field.active && field.name === 'red'"
+           [class.glowYellow]="field.active && field.name === 'yellow'"
+           [class.glowBlue]="field.active && field.name === 'blue'"
+           [ngStyle]="{backgroundColor: field.color}">
+      </div>
+
     </div>
 
   </div>
+
+  <button (click)="startGame()">
+    Start
+  </button>
+
 
 </div>
