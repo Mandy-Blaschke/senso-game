@@ -162,7 +162,6 @@ export class AppComponent implements OnInit {
 
   gameFinished(): void {
     this.everPlayed = true;
-    this.highscore = this.level;
     this.saveHighscore();
     this.simonsTurns = [];
     this.playersTurns = [];
@@ -171,7 +170,10 @@ export class AppComponent implements OnInit {
   }
 
   saveHighscore(): void {
-    localStorage.setItem('highscore', JSON.stringify(this.highscore));
+    if (this.level > this.highscore) {
+      this.highscore = this.level;
+      localStorage.setItem('highscore', JSON.stringify(this.highscore));
+    }
   }
 
   loadHighscore(): void {
