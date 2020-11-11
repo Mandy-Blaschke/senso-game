@@ -42,6 +42,20 @@
       justify-content: center;
       font-weight: bold;
       font-size: 1.5rem;
+
+      @media (max-width: 480px) {
+        left: 31%;
+        top: 31%;
+        height: 130px;
+        width: 130px;
+      }
+
+      @media (max-width: 350px){
+        left: 32%;
+        top: 32%;
+        height: 110px;
+        width: 110px;
+      }
     }
 
 
@@ -50,6 +64,16 @@
       width: 200px;
       margin: 5px;
       border: 6px solid #5a6262;
+
+      @media (max-width: 480px){
+        height: 150px;
+        width: 150px;
+      }
+
+      @media (max-width: 350px){
+        height: 130px;
+        width: 130px;
+      }
 
       &#yellow {
         grid-area: field1;

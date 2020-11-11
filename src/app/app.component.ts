@@ -23,7 +23,10 @@ export class AppComponent implements OnInit {
 
   level = 0;
 
-  timer = 1000;
+  getSleeptime(): number {
+    const ms = -40 * this.level + 1000;
+    return Math.max(ms, 200);
+  }
 
   ngOnInit(): void {
     this.preloadAudios();
@@ -107,12 +110,12 @@ export class AppComponent implements OnInit {
       this.simonsTurns.forEach((field) => {
         setTimeout(() => {
           this.playSound(field);
-        }, offset += this.timer);
+        }, offset += this.getSleeptime());
       });
 
       setTimeout(() => {
         resolve();
-      }, offset += this.timer);
+      }, offset += this.getSleeptime());
 
     });
 
@@ -136,14 +139,12 @@ export class AppComponent implements OnInit {
   }
 
   playersMove(field: Field): void {
-    let counter = -1;
-
     if (this.playerCanClick) {
       this.playSound(field);
       this.playersTurns.push(field);
-      counter++;
+      const index = this.playersTurns.length - 1;
 
-      if (this.playersTurns[counter] === this.simonsTurns[counter]) {
+      if (this.playersTurns[index].name === this.simonsTurns[index].name) {
 
         if (this.playersTurns.length === this.simonsTurns.length) {
           this.level++;
