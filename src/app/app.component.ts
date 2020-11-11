@@ -13,15 +13,15 @@ export class AppComponent implements OnInit {
     {name: 'green', color: '#2c932c', sound: 'soundGreen', active: false},
     {name: 'red', color: '#9e2626', sound: 'soundRed', active: false},
   ];
-
   simonsTurns: Field[] = [];
   playersTurns: Field[] = [];
 
   playerCanClick = false;
-
   activeGame = false;
 
+  highscore = 0;
   level = 0;
+  everPlayed = false;
 
   getSleeptime(): number {
     const ms = -40 * this.level + 1000;
@@ -160,12 +160,13 @@ export class AppComponent implements OnInit {
   }
 
   gameFinished(): void {
-    console.log('Falscher Zug - Spiel beendet');
+    this.everPlayed = true;
     this.simonsTurns = [];
     this.playersTurns = [];
     this.activeGame = false;
     this.level = 0;
   }
+
 
 }
 
