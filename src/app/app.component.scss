@@ -1,0 +1,30 @@
+.game {
+  display: flex;
+
+  .field {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    border-radius: 100%;
+
+    &.glowRed {
+      background-color: #fd0000 !important;
+      box-shadow: 0 0 25px #fd0000;
+    }
+
+    &.glowGreen {
+      background-color: #69fc01 !important;
+      box-shadow: 0 0 25px #69fc01;
+    }
+
+    &.glowBlue {
+      background-color: #005dfd !important;
+      box-shadow: 0 0 25px #005dfd;
+    }
+
+    &.glowYellow {
+      background-color: #fcf801 !important;
+      box-shadow: 0 0 25px #fcf801;
+    }
+  }
+}
